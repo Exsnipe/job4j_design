@@ -34,9 +34,9 @@ public class EvenNumbersIterator implements Iterator<Integer> {
     }
 
     private int findNextEven() {
-        for (int indexEl = index; indexEl < data.length; indexEl++) {
-            if (data[indexEl] % 2 == 0) {
-                return indexEl;
+        for (int i = index; i < data.length; i++) {
+            if (data[i] % 2 == 0) {
+                return i;
             }
         }
         return -1;
