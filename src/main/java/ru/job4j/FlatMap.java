@@ -23,13 +23,9 @@ public class FlatMap<T> implements Iterator<T> {
 
     @Override
     public T next() {
-        if (!cursor.hasNext()) {
+        if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        T rsl = cursor.next();
-        if (!cursor.hasNext() && data.hasNext()) {
-            cursor = data.next();
-        }
-        return rsl;
+        return cursor.next();
     }
 }
