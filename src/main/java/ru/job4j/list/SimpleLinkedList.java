@@ -29,14 +29,14 @@ public class SimpleLinkedList<E> implements List1<E> {
 
     @Override
     public E get(int index) {
-        Iterator<E> iterator = this.iterator();
+        Node<E> currentNode = first;
         for (int i = 0; i < index; i++) {
-            iterator.next();
+            currentNode = currentNode.next;
         }
-        if (!iterator.hasNext()) {
+        if (currentNode == null) {
             throw new IndexOutOfBoundsException();
         }
-        return iterator.next();
+        return currentNode.item;
     }
 
     @Override
