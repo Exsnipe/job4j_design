@@ -29,7 +29,7 @@ public class SimpleArrayList<T> implements List<T> {
     public T remove(int index) {
         T removable = get(index);
         System.arraycopy(container, index + 1, container, index, container.length - index - 1);
-        container[size] = null;
+        container[size - 1] = null;
         size--;
         modCount++;
         return removable;
@@ -71,11 +71,8 @@ public class SimpleArrayList<T> implements List<T> {
     }
 
     private void checkContainerSize() {
-        if (container.length == 0) {
-            container = (T[]) new Object[2];
-        }
         if (size == container.length - 1) {
-            container = Arrays.copyOf(container, container.length * 2);
+            container = Arrays.copyOf(container, container.length == 0 ? 2 : container.length * 2);
         }
     }
 
