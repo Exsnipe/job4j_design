@@ -2,10 +2,7 @@ package ru.job4j.list;
 
 import org.w3c.dom.Node;
 
-import java.util.Arrays;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class SimpleLinkedList<E> implements List1<E> {
     transient int size;
@@ -29,6 +26,7 @@ public class SimpleLinkedList<E> implements List1<E> {
 
     @Override
     public E get(int index) {
+        Objects.checkIndex(index, size);
         Node<E> currentNode = first;
         for (int i = 0; i < index; i++) {
             currentNode = currentNode.next;
