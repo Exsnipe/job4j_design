@@ -31,9 +31,6 @@ public class SimpleLinkedList<E> implements List1<E> {
         for (int i = 0; i < index; i++) {
             currentNode = currentNode.next;
         }
-        if (currentNode == null) {
-            throw new IndexOutOfBoundsException();
-        }
         return currentNode.item;
     }
 
@@ -45,7 +42,7 @@ public class SimpleLinkedList<E> implements List1<E> {
 
             @Override
             public boolean hasNext() {
-                if (expectedModCount != modCount) {
+                  if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
                 return currentNode.next != null;
