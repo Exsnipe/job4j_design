@@ -33,7 +33,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private int indexFor(int hash) {
-        return hash & (table.length - 1);
+        return hash & (capacity - 1);
     }
 
     private void expand() {
@@ -51,30 +51,19 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public V get(K key) {
-       V rsl = null;
-        for (MapEntry<K, V> currentMap : table) {
-            if (currentMap == null) {
-                continue;
-            }
-            if (currentMap.key.equals(key)) {
-                rsl = currentMap.value;
-                break;
-            }
-       }
-        return rsl;
+        int index = (key == null) ? indexFor(0) : indexFor(hash(key.hashCode()));
+        return table[index] == null ? null : table[index].value;
     }
 
     @Override
     public boolean remove(K key) {
         boolean rsl = false;
-        for (int index = 0; index < table.length; index++) {
-            if (table[index] != null && table[index].key.equals(key)) {
-                table[index] = null;
-                count--;
-                rsl = true;
-                modCOunt++;
-                break;
-            }
+        int index = (key == null) ? indexFor(0) : indexFor(hash(key.hashCode()));
+        if (table[index] != null) {
+            table[index] = null;
+            count--;
+            modCOunt++;
+            rsl = true;
         }
         return rsl;
     }

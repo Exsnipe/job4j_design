@@ -83,4 +83,17 @@ public class SimpleMapTest {
         assertTrue(iterator.hasNext());
     }
 
+    @Test
+    public void whenCheckIterator() {
+        Map<Integer, Integer> map = new SimpleMap<>();
+        map.put(1, 1);
+        map.put(2, 2);
+        map.put(3, 3);
+        Iterator<Integer> iterator = map.iterator();
+        iterator.next();
+        iterator.next();
+        assertThat(iterator.next(), is(3));
+    }
+
+
 }
