@@ -95,5 +95,20 @@ public class SimpleMapTest {
         assertThat(iterator.next(), is(3));
     }
 
+    @Test
 
+    public void whenLastElementHasNext() {
+
+        Map<Integer, Integer> map = new SimpleMap<>();
+        map.put(1, 1);
+        map.put(2, 2);
+        map.put(7, 3);
+        Iterator<Integer> iterator = map.iterator();
+        iterator.next();
+        iterator.next();
+        assertThat(map.get(7), is(3));
+        assertTrue(iterator.hasNext());
+        assertThat(iterator.next(), is(7));
+        assertFalse(iterator.hasNext());
+    }
 }

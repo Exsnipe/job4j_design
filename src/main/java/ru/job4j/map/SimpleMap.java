@@ -79,10 +79,10 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (expectedCount != modCOunt) {
                     throw new ConcurrentModificationException();
                 }
-               while (table[indexIterator] == null && indexIterator < table.length - 1) {
+               while (indexIterator < table.length && table[indexIterator] == null) {
                     indexIterator++;
                 }
-                return indexIterator < table.length - 1;
+                return indexIterator < table.length;
             }
 
             @Override
