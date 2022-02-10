@@ -29,4 +29,12 @@ public class ConfigTest {
         config.load();
         assertThat(config.value("ff"), is("ff"));
     }
+
+    @Test
+    public void whenTwoEquals() {
+        String path = "./data/pair_with_two_equals.properties";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value("name"), is("Ivan Ivanov"));
+    }
 }

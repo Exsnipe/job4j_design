@@ -24,7 +24,7 @@ public class Config {
                 .filter(s -> !s.startsWith("#") && s.length() > 0)
                 .collect(Collectors.toMap(
                         e -> {
-                            String[] spl = e.split("=");
+                            String[] spl = e.split("=", 2);
                             if (spl.length < 2 || (spl.length == 2 && "".equals(spl[0]) || "".equals(spl[1]))) {
                                 throw new IllegalArgumentException();
                             }
