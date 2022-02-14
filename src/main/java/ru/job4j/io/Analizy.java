@@ -1,9 +1,6 @@
 package ru.job4j.io;
 
-import java.io.BufferedReader;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -11,7 +8,6 @@ import java.util.stream.Collectors;
 
 public class Analizy {
     public void unavailable(String source, String target) {
-        List<String> list = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(source));
         PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
            AtomicBoolean started = new AtomicBoolean(false);
@@ -41,7 +37,7 @@ public class Analizy {
                                 }
                             }
                     );
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
