@@ -15,19 +15,21 @@ public class Analizy {
         try (BufferedReader reader = new BufferedReader(new FileReader(source));
         PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
            AtomicBoolean started = new AtomicBoolean(false);
+           AtomicBoolean rsl = new AtomicBoolean(false);
             reader.lines()
                    .filter(
                            line -> {
+                               rsl.set(false);
                                String[] divided = line.split(" ", 2);
                                if (!started.get() && ("500".equals(divided[0]) || "400".equals(divided[0]))) {
                                    started.set(true);
-                                   return true;
+                                   rsl.set(true);
                                }
                                if (started.get() && ("200".equals(divided[0]) || "300".equals(divided[0]))) {
                                    started.set(false);
-                                   return true;
+                                   rsl.set(true);
                                }
-                               return  false;
+                               return  rsl.get();
                            }
                    )
                     .forEach(
@@ -42,5 +44,10 @@ public class Analizy {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        Analizy analizy = new Analizy();
+        analizy.unavailable("source.txt", "target.txt");
     }
 }
