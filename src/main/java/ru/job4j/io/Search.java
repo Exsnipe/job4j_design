@@ -10,8 +10,12 @@ import java.util.function.Predicate;
 
 public class Search {
    public static void main(String[] args) throws IOException {
-      Path root = Paths.get(".");
-      search(root, p -> p.toFile().getName().endsWith(".xml")).forEach(System.out::println);
+      if (args.length < 2 || !args[1].startsWith(".")) {
+         throw new IllegalArgumentException("Wrong input parameters");
+      }
+      System.out.println(args[0] + " " + args[1]);
+      Path root = Paths.get(args[0]);
+      search(root, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
    }
 
    public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
