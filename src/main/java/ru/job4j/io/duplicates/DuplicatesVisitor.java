@@ -12,30 +12,28 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
-    private Map<Path, FileProperty> files = new HashMap<>();
-    private List<Path> pathList = new ArrayList<>();
+    private Map<FileProperty, List<Path>> map = new HashMap<>();
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attr) throws IOException {
-        files.put(file.toAbsolutePath(), new FileProperty(file.toFile().length(), file.toFile().getName()));
+        FileProperty currentFile = new FileProperty(file.toFile().length(), file.toFile().getName());
+        if (map.containsKey(currentFile)) {
+            map.get(currentFile).add(file.toAbsolutePath());
+        } else {
+            map.put(currentFile, new ArrayList<>());
+            map.get(currentFile).add(file.toAbsolutePath());
+        }
         return FileVisitResult.CONTINUE;
     }
 
     public void printFile() {
-        List<Path> duplicates = new ArrayList<>();
-        for (Path path : files.keySet()) {
-            if (!pathList.contains(path)) {
-                duplicates = files.keySet().stream()
-                        .filter(f -> files.get(f).equals(files.get(path)))
-                        .collect(Collectors.toList());
+        for (FileProperty curFile : map.keySet()) {
+            List<Path> list = map.get(curFile);
+            if (list.size() > 1) {
+                for (Path path : list) {
+                    System.out.println(path);
+                }
             }
-            if (duplicates.size() > 1) {
-                pathList.addAll(duplicates);
-            }
-        }
-        for (Path path : pathList) {
-            FileProperty curFile = files.get(path);
-            System.out.println(curFile.getName() + " " + curFile.getSize());
         }
     }
 }
