@@ -52,6 +52,6 @@ public class Zip {
             files.add(path.toFile());
             System.out.println(path.toFile().getName());
         }
-        zip.packFiles(files, new File("./result.zip"));
+        zip.packFiles(files, new File(keys.get("o")));
     }
 }
