@@ -14,6 +14,10 @@ public class ArgsName {
         return result;
     }
 
+    public int size() {
+        return values.size();
+    }
+
     private void parse(String[] args) {
         for (String arg : args) {
             String[] parts = arg.split("=", 2);
