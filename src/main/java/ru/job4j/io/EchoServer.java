@@ -12,6 +12,7 @@ import java.util.List;
 public class EchoServer {
     public static void main(String[] args) throws IOException {
         try (ServerSocket server = new ServerSocket(9000)) {
+            String firstLine;
             while (!server.isClosed()) {
                 List<String> message = new ArrayList<>();
                 Socket socket = server.accept();
@@ -19,16 +20,14 @@ public class EchoServer {
                     BufferedReader in = new BufferedReader(
                             new InputStreamReader(socket.getInputStream()));
                     out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-                    for (String str = in.readLine(); str != null && !str.isEmpty(); str = in.readLine()) {
-                        System.out.println(str);
-                        message.add(str);
-                    }
+                    firstLine = in.readLine();
+                    System.out.println(firstLine);
                     out.flush();
                 }
-            String[] answer = message.get(0).split(" ");
-            if ("/?msg=Bye".equals(answer[1])) {
+                String[] answer = firstLine.split(" ");
+                if ("/?msg=Bye".equals(answer[1])) {
                     server.close();
-            }
+                }
             }
         }
     }
