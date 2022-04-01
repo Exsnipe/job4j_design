@@ -16,8 +16,9 @@ public class UsageLog4j {
        boolean isOpen = true;
        byte home = 7;
        short typeKey = 8;
+       long status = 785848484585L;
        LOG.debug("User info name: {}, age: {}, weight: {}", name, age, weight);
        LOG.debug("Symbol is: {}, koff: {}, isOpen: {}", symbol, koff, isOpen);
-       LOG.debug("home: {}, typeKey: {}", home, typeKey);
+       LOG.debug("home: {}, typeKey: {}, status: {}", home, typeKey, status);
     }
 }
