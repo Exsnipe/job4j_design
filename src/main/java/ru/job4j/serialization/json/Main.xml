@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<airplane type="an2" weight="4000" isReactive="false">
+    <crew  amount="2"/>
+    <cycles>
+        <cycle>6</cycle>
+        <cycle>8</cycle>
+        <cycle>2</cycle>
+        <cycle>9</cycle>
+    </cycles>
+</airplane>
