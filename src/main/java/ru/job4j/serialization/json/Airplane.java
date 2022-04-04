@@ -1,13 +1,23 @@
 package ru.job4j.serialization.json;
 
+import javax.xml.bind.annotation.*;
 import java.util.Arrays;
 
+@XmlRootElement
 public class Airplane {
-    private final String type;
-    private final int weight;
-    private final boolean isReactive;
-    private final Crew crew;
-    private final int[] cycle;
+    @XmlAttribute
+    private String type;
+    @XmlAttribute
+    private int weight;
+    @XmlAttribute
+    private boolean isReactive;
+    private Crew crew;
+    @XmlElementWrapper(name = "cycles")
+    @XmlElement(name = "cycle")
+    private int[] cycle;
+
+    public Airplane() {
+    }
 
     public Airplane(String type, int weight, boolean isReactive, Crew crew, int[] cycle) {
         this.type = type;
