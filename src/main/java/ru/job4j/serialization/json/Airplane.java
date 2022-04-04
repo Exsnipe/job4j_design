@@ -20,6 +20,7 @@ public class Airplane {
     @Override
     public String toString() {
         return "Airplane{"
+                + "type=" + type
                 + "weight=" + weight
                 + ", isReactive=" + isReactive
                 + ", crew=" + crew
