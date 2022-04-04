@@ -3,7 +3,8 @@ package ru.job4j.serialization.json;
 import javax.xml.bind.annotation.*;
 import java.util.Arrays;
 
-@XmlRootElement
+@XmlRootElement(name = "airplane")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Airplane {
     @XmlAttribute
     private String type;
