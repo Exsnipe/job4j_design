@@ -28,6 +28,26 @@ public class Airplane {
         this.cycle = cycle;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public boolean isReactive() {
+        return isReactive;
+    }
+
+    public Crew getCrew() {
+        return crew;
+    }
+
+    public int[] getCycle() {
+        return cycle;
+    }
+
     @Override
     public String toString() {
         return "Airplane{"
