@@ -37,6 +37,5 @@ create table projects(
 create  table projects_employees(
     id serial primary  key,
     employees_id int references employee(id),
-    employees_name varchar(255) references employee(name),
-    projects_name varchar(255) references project(name)
+    projects_name varchar(255) references project(id)
 );
