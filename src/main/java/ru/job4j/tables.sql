@@ -29,6 +29,6 @@ create table projects(
 );
 create  table projects_employees(
     id serial primary  key,
-    employees_id int references employee(id),
-    projects_name varchar(255) references project(id)
+    employees_id int references employees(id),
+    projects_id int references projects(id)
 );
