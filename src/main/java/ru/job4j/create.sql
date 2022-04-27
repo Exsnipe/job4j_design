@@ -20,24 +20,16 @@ create table roles_us_rules(
     rule_id int references us_rules(id)
 )
 
-create table items(
-    id serial primary key,
-    item_name varchar(50),
-    user_id int references users(id),
-    comment_id int references comments(id),
-    attach_id int references attachs(id),
-    category_id int references category(id),
-    state_id int references state(id)
-);
-
 create table  comments(
     id serial primary key,
-    item_comment varchar(255)
+    item_comment varchar(255),
+    item_id int references items(id)
 )
 
 create table attachs(
     id serial primary key,
-    url_file varchar(100)
+    url_file varchar(100),
+    item_id int references items(id)
 );
 
 create table state(
@@ -50,3 +42,10 @@ create table category(
     category_name varchar(25)
 );
 
+create table items(
+    id serial primary key,
+    item_name varchar(50),
+    user_id int references users(id),
+    category_id int references category(id),
+    state_id int references state(id)
+);
