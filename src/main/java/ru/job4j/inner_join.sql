@@ -5,7 +5,7 @@ create table tr_groups (
 create table students (
     id serial primary key,
     fio varchar(10),
-    group_id references tr_groups(id)
+    group_id int references tr_groups(id)
 );
 insert into tr_groups (group_name) values ('tr-081');
 insert into tr_groups (group_name) values ('tr-082');
@@ -22,3 +22,8 @@ insert into students (fio, group_id) values ('uhf', 3);
 insert into students (fio, group_id) values ('jfe', 1);
 insert into students (fio) values ('rto');
 select * from students join tr_groups on students.group_id = tr_groups.id;
+select s.id, s.fio as фио, s.group_id, tr.group_name as имя_группы
+from students as s join tr_groups as tr on s.group_id = tr.id;
+select students.id, students.fio as фио, students.group_id, trg.group_name as имя_группы,
+ trg.id from students join tr_groups as trg on students.group_id = trg.id;
+
