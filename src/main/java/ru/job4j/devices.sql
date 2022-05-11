@@ -16,7 +16,15 @@ insert into people(name) values ('Pasha'), ('Sasha'), ('Kolya');
 insert into devices(name, price) values ('notebook', 700), ('phone', 500), ('mp3', 300);
 insert into devices_people(devices_id, people_id) values (1, 1), (1, 3), (2, 1), (2, 2), (3, 2), (3, 3);
 select avg(price) from devices;
-select dp.people_id, avg(d.price) from devices_people as dp join devices as d on dp.devices_id = d.id group by dp.people_id;
-select dp.people_id, avg(d.price) from devices_people as dp join devices as d on dp.devices_id = d.id group by dp.people_id having avg(d.price) > 450;
+select p.name, avg(d.price)
+from devices_people as pd
+inner join devices as d on pd.devices_id = d.id
+join people as p on pd.people_id = p.id
+group by p.name;
+select p.name, avg(d.price)
+from devices_people as pd
+inner join devices as d on pd.devices_id = d.id
+join people as p on pd.people_id = p.id
+group by p.name having avg(d.price) > 450;
 
 
