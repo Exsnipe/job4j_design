@@ -22,7 +22,8 @@ select p.name from product as p
 join type as t on p.type_id = t.id where t.name = 'СЫР';
 select p.name from product as p where p.name like '%мороженое%';
 select name, expired_date from product where expired_date < current_date;
-select * from product order by price desc limit 1;
+select * from product
+where product.price = (select max(product.price) from product);
 select t.name, count(*) from product as p join type as t
 on p.type_id = t.id group by t.name;
 select p.name, t.name from product as p join type as t
