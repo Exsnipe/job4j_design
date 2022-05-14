@@ -24,7 +24,7 @@ select * from departments as d
 left join employees as e on e.department_id = d.id where e.name is null;
 select * from employees as e
 left join departments as d on e.department_id = d.id;
-select * from departments as d
+select e.id, e.name, e.department_id, d.id, d.name from departments as d
 right join employees as e on d.id = e.department_id;
 create table teens (
 	id serial primary key,
