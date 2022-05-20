@@ -19,7 +19,7 @@ create table car (
 );
 insert into body (name) values ('седан'), ('хэтчбек'), ('пикап'), ('внедорожник'), ('кабриолет');
 insert into engine (name) values ('VT2'), ('SF174'), ('DVX-turbo'), ('FGS-001'), ('TVS-2MS');
-insert into gearbox (name) values ('at'), ('cvt'), ('dsg', 'mt');
+insert into gearbox (name) values ('at'), ('cvt'), ('dsg'), ('mt');
 insert into car (name, body_id, engine_id, gearbox_id) values ('Ford', 1, 4, 1),
 ('Toyota', 3, 2, 1), ('Renault', 2, 1, 3), ('Kia', 4, 3, 2),
 ('Lada', 1, 2, 1), ('Honda', 3, 1, 3), ('Hyndai', 2, 4, 2);
