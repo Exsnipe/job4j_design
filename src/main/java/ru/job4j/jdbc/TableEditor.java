@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
-import java.sql.ResultSet;
 import java.util.StringJoiner;
 import java.io.InputStream;
 
@@ -19,7 +18,7 @@ public class TableEditor implements AutoCloseable {
         initConnection();
     }
 
-    private void initConnection() throws IOException, ClassNotFoundException, SQLException {
+    private void initConnection() {
         try {
             Class.forName(properties.getProperty("driver"));
             connection = DriverManager.getConnection(properties.getProperty("url"),
@@ -29,7 +28,7 @@ public class TableEditor implements AutoCloseable {
         }
     }
 
-    private void createStatement(String sql) throws SQLException {
+    private void createStatement(String sql) {
         try (Statement statement = connection.createStatement()) {
             statement.execute(sql);
         } catch (SQLException sqlEx) {
@@ -37,29 +36,29 @@ public class TableEditor implements AutoCloseable {
         }
     }
 
-    public void createTable(String tableName) throws Exception {
+    public void createTable(String tableName) {
         String sql = "create table if not exists " + tableName + " ()";
         createStatement(sql);
     }
 
-    public void dropTable(String tableName) throws Exception {
+    public void dropTable(String tableName) {
         String sql = "drop table " + tableName;
         createStatement(sql);
     }
 
-    public void addColumn(String tableName, String columnName, String type) throws Exception {
+    public void addColumn(String tableName, String columnName, String type) {
         String sql = "alter table " + tableName
                 + " add column " + columnName + " " + type;
         createStatement(sql);
     }
 
-    public void dropColumn(String tableName, String columnName) throws Exception {
+    public void dropColumn(String tableName, String columnName) {
         String sql = "alter table " + tableName
             + " drop column " + columnName;
         createStatement(sql);
     }
 
-    public void renameColumn(String tableName, String columnName, String newColumnName) throws Exception {
+    public void renameColumn(String tableName, String columnName, String newColumnName) {
         String sql = "alter table " + tableName
             + " rename column " + columnName + " to " + newColumnName;
         createStatement(sql);
@@ -97,17 +96,18 @@ public class TableEditor implements AutoCloseable {
                 .getResourceAsStream("configDB.properties")) {
             config.load(in);
         }
-        TableEditor tableEditor = new TableEditor(config);
-        tableEditor.createTable("ex1");
-        Class.forName(config.getProperty("driver"));
-        Connection connection = DriverManager.getConnection(config.getProperty("url"),
-                config.getProperty("login"), config.getProperty("password"));
-        tableEditor.addColumn("ex1", "num", "int");
-        System.out.println(getTableScheme(connection, "ex1"));
-        tableEditor.renameColumn("ex1", "num", "mun");
-        System.out.println(getTableScheme(connection, "ex1"));
-        tableEditor.dropColumn("ex1", "mun");
-        System.out.println(getTableScheme(connection, "ex1"));
-        tableEditor.dropTable("ex1");
+        try (TableEditor tableEditor = new TableEditor(config);) {
+            tableEditor.createTable("ex1");
+            Class.forName(config.getProperty("driver"));
+            Connection connection = DriverManager.getConnection(config.getProperty("url"),
+                    config.getProperty("login"), config.getProperty("password"));
+            tableEditor.addColumn("ex1", "num", "int");
+            System.out.println(getTableScheme(connection, "ex1"));
+            tableEditor.renameColumn("ex1", "num", "mun");
+            System.out.println(getTableScheme(connection, "ex1"));
+            tableEditor.dropColumn("ex1", "mun");
+            System.out.println(getTableScheme(connection, "ex1"));
+            tableEditor.dropTable("ex1");
+        }
     }
 }
