@@ -27,7 +27,9 @@ public class ImportDB {
             rd.lines().forEach(
                     line -> {
                         String[] parts = line.split(";", 2);
-                        if (parts.length > 1) {
+                        if (parts.length < 2 || parts[0].equals("") || parts[1].equals("")) {
+                            throw new IllegalArgumentException();
+                        } else {
                             user.add(new User(parts[0], parts[1]));
                         }
                     }
