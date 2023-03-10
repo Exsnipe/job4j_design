@@ -19,7 +19,9 @@ public class AppleStore {
     }
 
     public String getFirstUpsetCustomer() {
-        this.getLastHappyCustomer();
+        for (int index = 0; index < amount; index++) {
+            customerQueue.poll();
+        }
         return customerQueue.poll().name();
     }
 }
