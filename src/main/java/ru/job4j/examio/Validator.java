@@ -35,10 +35,6 @@ public class Validator {
             }
         }
         Path dir = Paths.get(result.get("-d"));
-        System.out.println(dir);
-        if (!Files.isDirectory(dir)) {
-            throw new IllegalArgumentException("Directory does not exists");
-        }
         return result;
     }
 

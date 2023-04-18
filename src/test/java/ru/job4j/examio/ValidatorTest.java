@@ -27,13 +27,6 @@ public class ValidatorTest {
     }
 
     @Test
-    public void whenNotExists() {
-        String args = "-d=c:/projects/job4j -n=mtm.png -t=mask -o=log.txt";
-        assertThatThrownBy(() -> validate(args)).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Directory does not exists");
-    }
-
-    @Test
     public void whenNotAllArguments() {
         String args = "-d=c:/projects/job4j -t=mask -o=log.txt";
         assertThatThrownBy(() -> validate(args)).isInstanceOf(IllegalArgumentException.class)
