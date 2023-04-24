@@ -22,7 +22,7 @@ public class Validator {
                 .collect(Collectors.toMap(
                     e -> {
                         String[] spl = e.split("=", 2);
-                        if (spl.length < 2 || "".equals(spl[0]) || "".equals(spl[1])) {
+                        if (spl.length < 2 || spl[0].isEmpty() || spl[1].isEmpty()) {
                             throw new IllegalArgumentException();
                         }
                         return spl[0];
