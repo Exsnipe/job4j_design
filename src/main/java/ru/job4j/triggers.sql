@@ -20,9 +20,7 @@ create or replace function tax()
 	returns trigger as
 $$
 	begin
-		update products
-		set price = price * 1.13
-		where id = new.id;
+		new.price = new.price * 1.13;
 		return new;
 	end;
 $$
