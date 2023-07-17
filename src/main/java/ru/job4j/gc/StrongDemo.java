@@ -12,14 +12,9 @@ public class StrongDemo {
     }
 
     private static void example1() throws InterruptedException {
-        Object[] objects = new Object[100];
+        StrongDemoModel[] objects = new StrongDemoModel[100];
         for (int i = 0; i < 100; i++) {
-            objects[i] = new Object() {
-                @Override
-                protected void finalize() throws Throwable {
-                    System.out.println("Object removed!");
-                }
-            };
+            objects[i] = new StrongDemoModel(i);
         }
         for (int i = 0; i < 100; i++) {
             objects[i] = null;
