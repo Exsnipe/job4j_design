@@ -52,7 +52,7 @@ public class WeakDemo {
         ReferenceQueue<Object> queue = new ReferenceQueue<>();
         WeakReference<Object> weakReference = new WeakReference<>(object, queue);
         object = null;
-        //System.gc();
+        System.gc();
         TimeUnit.SECONDS.sleep(3);
         System.out.println("Object from from weak reference: " + weakReference.get());
         System.out.println("Object from ReferenceQueue " + queue.poll());
