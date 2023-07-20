@@ -1,11 +1,10 @@
 package ru.job4j.cache.menu;
 
+import ru.job4j.cache.AbstractCache;
 import ru.job4j.cache.DirFileCache;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
 
@@ -16,7 +15,7 @@ public class Emulator {
 
     private static Path directory;
     private static Path file;
-    private DirFileCache dirFileCache;
+    private static AbstractCache<String, String> dirFileCache;
 
     private static final String MENU = """
             Введите 1 для выбора кэшируемой директории.
@@ -32,17 +31,38 @@ public class Emulator {
         boolean run = true;
         while (run) {
             System.out.println(MENU);
-            int answer = scanner.nextInt();
+            int answer;
+            try {
+                answer = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException numberFormatException) {
+                System.out.println("press correct number");
+                continue;
+            }
             if (answer == INDICATE_CASHING_DIRECTORY) {
-                chooseDirectory(scanner);
+                dirFileCache = chooseDirectory(scanner);
             } else if (answer == LOAD_FILE_IN_CASH) {
-
+                if (dirFileCache == null) {
+                    System.out.println("Directory has not been chosen");
+                    continue;
+                }
+                loadFileInCash(scanner);
+            } else if (answer == OBTAIN_CONTENT_OF_FILE) {
+                if (dirFileCache == null) {
+                    System.out.println("Directory has not been chosen");
+                    continue;
+                }
+                System.out.println("Press file name");
+                String fileName = scanner.nextLine();
+                System.out.println(dirFileCache.get(fileName));
+            } else {
+                run = false;
+                System.out.println("Program has been canceled");
             }
         }
     }
 
     private static DirFileCache chooseDirectory(Scanner scanner) {
-        System.out.println("type directory path");
+        System.out.println("Press directory path");
         String dir = scanner.nextLine();
         if (new File(dir).isDirectory()) {
             return new DirFileCache(dir);
@@ -53,13 +73,8 @@ public class Emulator {
     }
 
     private static void loadFileInCash(Scanner scanner) {
-        System.out.println("type name of file");
-        String file = scanner.nextLine();
-        Path filePath = Path.of(String.valueOf(directory), file);
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()))) {
-
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
+        System.out.println("Press file name");
+        String fileName = scanner.nextLine();
+        dirFileCache.put(fileName, dirFileCache.get(fileName));
     }
 }
