@@ -14,10 +14,11 @@ public class DirFileCache extends AbstractCache<String, String> {
 
     @Override
     protected String load(String key) {
+        System.out.println("Read file " + key);
         String result = "";
         try {
             result = Files.readString(Path.of(cachingDir + "\\" + key));
-            put(key, result);
+            super.put(key, result);
         } catch (IOException ioException) {
             System.out.println("There are no such file");
         }
