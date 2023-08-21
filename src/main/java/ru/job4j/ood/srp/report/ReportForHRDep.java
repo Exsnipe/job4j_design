@@ -5,14 +5,15 @@ import ru.job4j.ood.srp.model.Employee;
 import ru.job4j.ood.srp.store.Store;
 
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
-public class ReportEngine implements Report {
+public class ReportForHRDep implements Report {
 
     private final Store store;
     private final DateTimeParser<Calendar> dateTimeParser;
 
-    public ReportEngine(Store store, DateTimeParser<Calendar> dateTimeParser) {
+    public ReportForHRDep(Store store, DateTimeParser<Calendar> dateTimeParser) {
         this.store = store;
         this.dateTimeParser = dateTimeParser;
     }
@@ -22,13 +23,18 @@ public class ReportEngine implements Report {
         StringBuilder text = new StringBuilder();
         text.append("Name; Hired; Fired; Salary;")
                 .append(System.lineSeparator());
-        for (Employee employee : store.findBy(filter)) {
-            text.append(employee.getName()).append(" ")
-                    .append(dateTimeParser.parse(employee.getHired())).append(" ")
-                    .append(dateTimeParser.parse(employee.getFired())).append(" ")
-                    .append(employee.getSalary())
-                    .append(System.lineSeparator());
-        }
+        store.findBy(filter).stream()
+                .sorted(new CompBySalary())
+                .forEach(em -> text.append(em.getName()).append(" ").append(em.getSalary()).append(System.lineSeparator()));
+        text.deleteCharAt(text.length() - 1);
         return text.toString();
+    }
+
+    private static class CompBySalary implements Comparator<Employee> {
+
+        @Override
+        public int compare(Employee o1, Employee o2) {
+            return Double.compare(o2.getSalary(), o1.getSalary());
+        }
     }
 }
