@@ -21,12 +21,10 @@ public class ReportForHRDep implements Report {
     @Override
     public String generate(Predicate<Employee> filter) {
         StringBuilder text = new StringBuilder();
-        text.append("Name; Hired; Fired; Salary;")
-                .append(System.lineSeparator());
+        text.append("Name; Hired; Fired; Salary;");
         store.findBy(filter).stream()
                 .sorted(new CompBySalary())
-                .forEach(em -> text.append(em.getName()).append(" ").append(em.getSalary()).append(System.lineSeparator()));
-        text.deleteCharAt(text.length() - 1);
+                .forEach(em -> text.append(System.lineSeparator()).append(em.getName()).append(" ").append(em.getSalary()));
         return text.toString();
     }
 
@@ -36,5 +34,16 @@ public class ReportForHRDep implements Report {
         public int compare(Employee o1, Employee o2) {
             return Double.compare(o2.getSalary(), o1.getSalary());
         }
+    }
+
+    public static void main(String[] args) {
+        String data = String.join(
+                " --- ",
+                "name;age;last_name;education",
+                "Tom;20;Smith;Bachelor",
+                "Jack;25;Johnson;Undergraduate",
+                "William;30;Brown;Secondary special"
+        );
+        System.out.println(data);
     }
 }
