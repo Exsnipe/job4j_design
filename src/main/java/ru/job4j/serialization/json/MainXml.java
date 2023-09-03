@@ -10,21 +10,20 @@ public class MainXml {
     public static void main(String[] args) throws Exception {
         Person person = new Person(true, 30, new Contact("558-87-345"),
                 new String[] {"Worker", "Married"});
-        JAXBContext jaxbContext = JAXBContext.newInstance(Person.class);
-        Marshaller marshaller = jaxbContext.createMarshaller();
+
+        JAXBContext context = JAXBContext.newInstance(Person.class);
+        Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         String xml = "";
-
         try (StringWriter writer = new StringWriter()) {
             marshaller.marshal(person, writer);
             xml = writer.getBuffer().toString();
             System.out.println(xml);
         }
-
-        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        Unmarshaller unmarshaller = context.createUnmarshaller();
         try (StringReader reader = new StringReader(xml)) {
             Person result = (Person) unmarshaller.unmarshal(reader);
-            System.out.println(result);
+            System.out.println(reader);
         }
     }
 }

@@ -1,6 +1,7 @@
 package ru.job4j.ood.srp.formatter;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
@@ -16,6 +17,6 @@ public class CalendarAdapterJson implements JsonSerializer<Calendar> {
 
     @Override
     public JsonElement serialize(Calendar calendar, Type type, JsonSerializationContext jsonSerializationContext) {
-        return null;
+        return new JsonPrimitive(DATE_FORMAT.get().format(calendar.getTime()));
     }
 }
