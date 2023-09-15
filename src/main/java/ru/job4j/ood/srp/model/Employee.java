@@ -9,9 +9,9 @@ import java.util.Objects;
 
 public class Employee {
     private String name;
-    @XmlJavaTypeAdapter(CalendarAdapterXml.class)
+//    @XmlJavaTypeAdapter(CalendarAdapterXml.class)
     private Calendar hired;
-    @XmlJavaTypeAdapter(CalendarAdapterXml.class)
+//    @XmlJavaTypeAdapter(CalendarAdapterXml.class)
     private Calendar fired;
     private double salary;
 

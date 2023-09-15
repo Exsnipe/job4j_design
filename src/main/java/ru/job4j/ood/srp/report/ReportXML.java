@@ -55,12 +55,12 @@ public class ReportXML implements Report {
                 new Employee("Petrov", calendar, calendar, 50000),
                 new Employee("Sidorov", calendar, calendar, 65000)
         );
-        JAXBContext context = JAXBContext.newInstance(Employees.class);
+        JAXBContext context = JAXBContext.newInstance(Employee.class);
         Marshaller marshaller1 = context.createMarshaller();
         marshaller1.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         String xml = "";
         try (StringWriter writer = new StringWriter()) {
-            marshaller1.marshal(new Employees(employeeList), writer);
+            marshaller1.marshal(employeeList.get(1), writer);
             xml = writer.getBuffer().toString();
         } catch (IOException ioException) {
             ioException.printStackTrace();
