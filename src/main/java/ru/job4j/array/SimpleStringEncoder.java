@@ -18,7 +18,8 @@ public class SimpleStringEncoder {
             }
         }
         if (counter > 0) {
-            result.append(symbol).append(++counter);
+            counter++;
+            result.append(symbol).append(counter);
         } else {
             result.append(symbol);
         }
