@@ -11,7 +11,8 @@ public class SimpleStringEncoder {
             } else {
                 result.append(symbol);
                 if (counter > 0) {
-                    result.append(++counter);
+                    counter++;
+                    result.append(counter);
                 }
                 symbol = input.charAt(index);
                 counter = 0;
