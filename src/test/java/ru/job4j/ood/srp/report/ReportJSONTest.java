@@ -19,6 +19,7 @@ public class ReportJSONTest {
         Report report = new ReportJSON(store);
         Calendar calendar = GregorianCalendar.getInstance();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
+        System.out.println(parser.parse(calendar));
         store.add(new Employee("Ivanov", calendar, calendar, 50000));
         String result = "[{\"name\":\"Ivanov\",\"hired\":\"" + parser.parse(calendar)
                 + "\",\"fired\":\"" + parser.parse(calendar) + "\",\"salary\":50000.0}]";

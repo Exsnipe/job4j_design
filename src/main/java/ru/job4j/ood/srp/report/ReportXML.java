@@ -1,5 +1,6 @@
 package ru.job4j.ood.srp.report;
 
+import ru.job4j.ood.srp.formatter.CalendarAdapterXml;
 import ru.job4j.ood.srp.formatter.DateTimeParser;
 import ru.job4j.ood.srp.formatter.ReportDateTimeParser;
 import ru.job4j.ood.srp.model.Employee;
@@ -23,12 +24,10 @@ import java.util.function.Predicate;
 public class ReportXML implements Report {
 
     private final Store store;
-    private final DateTimeParser<Calendar> parser;
     private final Marshaller marshaller;
 
-    public ReportXML(Store store, DateTimeParser<Calendar> parser, Marshaller marshaller) {
+    public ReportXML(Store store, Marshaller marshaller) {
         this.store = store;
-        this.parser = parser;
         this.marshaller = marshaller;
     }
 
@@ -36,7 +35,7 @@ public class ReportXML implements Report {
     public String generate(Predicate<Employee> filter) {
         String result = "";
         try (StringWriter writer = new StringWriter()) {
-            marshaller.marshal(store.findBy(filter), writer);
+            marshaller.marshal(new Employees(store.findBy(filter)), writer);
             result = writer.getBuffer().toString();
         } catch (IOException | JAXBException ioException) {
             ioException.printStackTrace();
@@ -47,24 +46,24 @@ public class ReportXML implements Report {
     public static void main(String[] args) throws Exception {
         Store store1 = new MemStore();
         Calendar calendar = Calendar.getInstance();
-        /*store1.add(new Employee("Ivanov", calendar, calendar, 45000));
-        store1.add(new Employee("Petrov", calendar, calendar, 50000));
-        store1.add(new Employee("Sidorov", calendar, calendar, 65000));*/
-        List<Employee> employeeList = List.of(
-                new Employee("Ivanov", calendar, calendar, 45000),
-                new Employee("Petrov", calendar, calendar, 50000),
-                new Employee("Sidorov", calendar, calendar, 65000)
-        );
-        JAXBContext context = JAXBContext.newInstance(Employee.class);
+        Calendar calendar1 = Calendar.getInstance();
+
+        store1.add(new Employee("Ivanov", calendar, calendar1, 45000));
+
+        JAXBContext context = JAXBContext.newInstance(Employees.class);
         Marshaller marshaller1 = context.createMarshaller();
         marshaller1.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        String xml = "";
+        ReportXML report = new ReportXML(store1, marshaller1);
+        System.out.println(report.generate((employee -> true)));
+        System.out.println("--------------------------------------------------------");
+        System.out.println(store1.findBy((employee -> employee.getName().equals("Ivanov"))).get(0).getFired());
+        /*String xml = "";
         try (StringWriter writer = new StringWriter()) {
-            marshaller1.marshal(employeeList.get(1), writer);
+            marshaller1.marshal(new Employees(store1.findBy((em) -> true)), writer);
             xml = writer.getBuffer().toString();
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
-        System.out.println(xml);
+        System.out.println(xml);*/
     }
 }
