@@ -49,6 +49,7 @@ public class ReportXML implements Report {
         Calendar calendar1 = Calendar.getInstance();
 
         store1.add(new Employee("Ivanov", calendar, calendar1, 45000));
+        store1.add(new Employee("Petrov", calendar, calendar1, 38000));
 
         JAXBContext context = JAXBContext.newInstance(Employees.class);
         Marshaller marshaller1 = context.createMarshaller();
@@ -57,13 +58,5 @@ public class ReportXML implements Report {
         System.out.println(report.generate((employee -> true)));
         System.out.println("--------------------------------------------------------");
         System.out.println(store1.findBy((employee -> employee.getName().equals("Ivanov"))).get(0).getFired());
-        /*String xml = "";
-        try (StringWriter writer = new StringWriter()) {
-            marshaller1.marshal(new Employees(store1.findBy((em) -> true)), writer);
-            xml = writer.getBuffer().toString();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-        System.out.println(xml);*/
     }
 }
