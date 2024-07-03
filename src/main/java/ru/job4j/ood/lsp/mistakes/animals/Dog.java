@@ -8,6 +8,7 @@ public class Dog extends Animal {
         super(age);
     }
 
+    @Override
     public boolean isOld() {
         return age > 10;
     }

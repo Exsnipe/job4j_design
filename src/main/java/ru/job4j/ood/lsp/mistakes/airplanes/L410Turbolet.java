@@ -6,7 +6,8 @@ public class L410Turbolet extends Airplane {
         super(emergencyFuelLevel);
     }
 
+    @Override
     public boolean safetyFuelLeve(int distanceToAirfield) {
-        return emergencyFuelLevel > 600;
+        return emergencyFuelLevel > 600 && emergencyFuelLevel > distanceToAirfield / 1000;
     }
 }
