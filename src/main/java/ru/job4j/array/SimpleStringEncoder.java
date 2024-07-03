@@ -8,17 +8,19 @@ public class SimpleStringEncoder {
         for (int index = 1; index < input.length(); index++) {
             if (input.charAt(index) == symbol) {
                 counter++;
-                continue;
+            } else {
+                result.append(symbol);
+                if (counter > 0) {
+                    counter++;
+                    result.append(counter);
+                }
+                symbol = input.charAt(index);
+                counter = 0;
             }
-            result.append(symbol);
-            if (counter > 0) {
-                result.append(++counter);
-            }
-            symbol = input.charAt(index);
-            counter = 0;
         }
         if (counter > 0) {
-            result.append(symbol).append(++counter);
+            counter++;
+            result.append(symbol).append(counter);
         } else {
             result.append(symbol);
         }
