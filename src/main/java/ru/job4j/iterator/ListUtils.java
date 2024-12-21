@@ -11,7 +11,7 @@ public class ListUtils {
     }
 
     public static <T> void addAfter(List<T> list, int index, T value) {
-        Objects.checkIndex(index, list.size() - 1); // Ensure index is valid
+        Objects.checkIndex(index, list.size() - 1);
         list.add(index + 1, value);
     }
 
@@ -34,7 +34,7 @@ public class ListUtils {
     }
 
     public static <T> void removeAll(List<T> list, List<T> elements) {
-        Set<T> elementSet = new HashSet<>(elements); // Convert to Set for faster lookups
+        Set<T> elementSet = new HashSet<>(elements);
         ListIterator<T> iterator = list.listIterator();
         while (iterator.hasNext()) {
             if (elementSet.contains(iterator.next())) {
