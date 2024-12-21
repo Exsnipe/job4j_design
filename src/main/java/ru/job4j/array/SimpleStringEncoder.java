@@ -2,28 +2,31 @@ package ru.job4j.array;
 
 public class SimpleStringEncoder {
     public static String encode(String input) {
+        if (input.isEmpty()) {
+            return "";
+        }
+
         StringBuilder result = new StringBuilder();
         char symbol = input.charAt(0);
-        int counter = 0;
+        int counter = 1;
+
         for (int index = 1; index < input.length(); index++) {
             if (input.charAt(index) == symbol) {
                 counter++;
             } else {
                 result.append(symbol);
-                if (counter > 0) {
-                    counter++;
+                if (counter > 1) {
                     result.append(counter);
                 }
                 symbol = input.charAt(index);
-                counter = 0;
+                counter = 1;
             }
         }
-        if (counter > 0) {
-            counter++;
-            result.append(symbol).append(counter);
-        } else {
-            result.append(symbol);
+        result.append(symbol);
+        if (counter > 1) {
+            result.append(counter);
         }
+
         return result.toString();
     }
 }
