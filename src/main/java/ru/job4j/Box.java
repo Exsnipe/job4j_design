@@ -1,7 +1,10 @@
 package ru.job4j;
 
+import java.util.Objects;
+
 public class Box {
     private static final String UNKNOWN = "Unknown object";
+
     private int vertex;
     private final int edge;
     private String type = "";
@@ -10,6 +13,23 @@ public class Box {
         this.vertex = vertex;
         this.edge = edge;
         init();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Box box = (Box) o;
+        return vertex == box.vertex && edge == box.edge && Objects.equals(type, box.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(vertex, edge, type);
     }
 
     private void init() {

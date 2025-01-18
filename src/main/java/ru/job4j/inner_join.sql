@@ -26,4 +26,3 @@ select s.id, s.fio as фио, s.group_id, tr.group_name as имя_группы
 from students as s join tr_groups as tr on s.group_id = tr.id;
 select students.id, students.fio as фио, students.group_id, trg.group_name as имя_группы,
  trg.id from students join tr_groups as trg on students.group_id = trg.id;
-
