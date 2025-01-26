@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
+
 @Disabled
 public class Cinema3DTest {
     @Test

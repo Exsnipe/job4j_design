@@ -5,10 +5,10 @@ import org.w3c.dom.Node;
 import java.util.*;
 
 public class SimpleLinkedList<E> implements List1<E> {
-    transient int size;
-    int modCount;
-    transient Node<E> first;
-    transient Node<E> last;
+    private transient int size;
+    private int modCount;
+    private transient Node<E> first;
+    private transient Node<E> last;
 
     @Override
     public void add(E value) {
@@ -37,7 +37,8 @@ public class SimpleLinkedList<E> implements List1<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            public SimpleLinkedList.Node<E> currentNode = new SimpleLinkedList.Node<>(null, null, first);
+            private SimpleLinkedList.Node<E> currentNode =
+                    new SimpleLinkedList.Node<>(null, null, first);
             private final int expectedModCount = modCount;
 
             @Override
@@ -61,9 +62,9 @@ public class SimpleLinkedList<E> implements List1<E> {
     }
 
     private static class Node<E> {
-        E item;
-        Node<E> next;
-        Node<E> prev;
+        private E item;
+        private Node<E> next;
+        private Node<E> prev;
 
         Node(Node<E> prev, E element, Node<E> next) {
             this.item = element;

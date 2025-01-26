@@ -7,15 +7,26 @@ import java.util.function.Predicate;
 
 public interface Tree<E> {
     boolean isBinary();
+
     boolean add(E parent, E child);
+
     Optional<Node<E>> findBy(E vale);
 
     class Node<E> {
-        final E value;
-        final List<Node<E>> children = new ArrayList<>();
+        private final E value;
+
+        private final List<Node<E>> children = new ArrayList<>();
 
         public Node(E value) {
             this.value = value;
+        }
+
+        public E getValue() {
+            return value;
+        }
+
+        public List<Node<E>> getChildren() {
+            return children;
         }
 
         @Override

@@ -59,7 +59,7 @@ public class ForwardLinked<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            Node<T> node = head;
+            private Node<T> node = head;
 
             @Override
             public boolean hasNext() {
@@ -79,8 +79,8 @@ public class ForwardLinked<T> implements Iterable<T> {
     }
 
     public static class Node<T> {
-        T value;
-        Node<T> next;
+        private Node<T> next;
+        private T value;
 
         public Node(T value, Node<T> next) {
             this.value = value;

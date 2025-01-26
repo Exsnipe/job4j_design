@@ -24,7 +24,8 @@ public class ReportForHRDep implements Report {
         text.append("Name; Hired; Fired; Salary;");
         store.findBy(filter).stream()
                 .sorted(new CompBySalary())
-                .forEach(em -> text.append(System.lineSeparator()).append(em.getName()).append(" ").append(em.getSalary()));
+                .forEach(em -> text.append(System.lineSeparator())
+                        .append(em.getName()).append(" ").append(em.getSalary()));
         return text.toString();
     }
 

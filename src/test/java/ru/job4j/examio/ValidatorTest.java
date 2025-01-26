@@ -51,6 +51,7 @@ public class ValidatorTest {
     public void whenWithArrayNoOneArgument() {
         String args = "-d=c:/projects/job4j_design -t=mask -o=log.txt";
         assertThatThrownBy(() -> validate(args, new String[] {"-d", "-n", "-t", "-o"}))
-                .isInstanceOf(IllegalArgumentException.class).hasMessage("There are no -n argument");
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("There are no -n argument");
     }
 }

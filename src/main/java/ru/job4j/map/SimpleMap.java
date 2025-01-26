@@ -11,7 +11,6 @@ public class SimpleMap<K, V> implements Map<K, V> {
     private int modCOunt = 0;
     private MapEntry<K, V>[] table = new MapEntry[capacity];
 
-
     @Override
     public boolean put(K key, V value) {
         boolean rsl = false;
@@ -96,8 +95,8 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private static class MapEntry<K, V> {
-        K key;
-        V value;
+        private K key;
+        private V value;
 
         public MapEntry(K key, V value) {
             this.key = key;

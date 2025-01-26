@@ -6,6 +6,11 @@ public class Model1 {
     private final int anInt;
     private final char aChar;
 
+    public Model1(int a, char b) {
+        this.anInt = a;
+        this.aChar = b;
+    }
+
     public int getAnInt() {
         return anInt;
     }
@@ -29,12 +34,5 @@ public class Model1 {
     @Override
     public int hashCode() {
         return Objects.hash(anInt, aChar);
-    }
-
-    public Model1(int a, char b) {
-        this.anInt = a;
-        this.aChar = b;
-
-
     }
 }

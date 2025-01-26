@@ -16,7 +16,8 @@ public class CalendarAdapterJson implements JsonSerializer<Calendar> {
             = ThreadLocal.withInitial(() -> new SimpleDateFormat("dd:MM:yyyy HH:mm"));
 
     @Override
-    public JsonElement serialize(Calendar calendar, Type type, JsonSerializationContext jsonSerializationContext) {
+    public JsonElement serialize(Calendar calendar, Type type,
+                                 JsonSerializationContext jsonSerializationContext) {
         return new JsonPrimitive(DATE_FORMAT.get().format(calendar.getTime()));
     }
 }

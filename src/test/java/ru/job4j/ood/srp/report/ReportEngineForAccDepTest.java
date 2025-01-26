@@ -73,6 +73,7 @@ public class ReportEngineForAccDepTest {
                 .append(parser.parse(employee2.getFired())).append(" ")
                 .append(employee2.getSalary())
                 .append(System.lineSeparator());
-        assertThat(engine.generate(em -> em.getName().startsWith("P"))).isEqualTo(expected.toString());
+        assertThat(engine.generate(em -> em.getName().
+                startsWith("P"))).isEqualTo(expected.toString());
     }
 }

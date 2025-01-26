@@ -15,6 +15,7 @@ public class MaxMin {
         }
         return searchedValue;
     }
+
     public <T> T max(List<T> value, Comparator<T> comparator) {
         return findValue(value, comparator);
     }

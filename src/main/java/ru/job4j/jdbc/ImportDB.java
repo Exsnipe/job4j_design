@@ -57,8 +57,8 @@ public class ImportDB {
     }
 
     private static class User {
-        String name;
-        String email;
+        private String name;
+        private String email;
 
         public User(String name, String email) {
             this.name = name;
@@ -66,9 +66,11 @@ public class ImportDB {
         }
     }
 
-    public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException,
+            SQLException, ClassNotFoundException {
         Properties cfg = new Properties();
-        try (InputStream in = ImportDB.class.getClassLoader().getResourceAsStream("conf.properties")) {
+        try (InputStream in = ImportDB.class.getClassLoader()
+                .getResourceAsStream("conf.properties")) {
             cfg.load(in);
         }
         ImportDB importDB = new ImportDB(cfg, "./dump.txt");

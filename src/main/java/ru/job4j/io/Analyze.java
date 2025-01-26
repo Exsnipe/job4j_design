@@ -1,12 +1,9 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.Collectors;
 
-public class Analizy {
+public class Analyze {
     public void unavailable(String source, String target) {
         try (BufferedReader reader = new BufferedReader(new FileReader(source));
         PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
@@ -17,11 +14,13 @@ public class Analizy {
                            line -> {
                                rsl.set(false);
                                String[] divided = line.split(" ", 2);
-                               if (!started.get() && ("500".equals(divided[0]) || "400".equals(divided[0]))) {
+                               if (!started.get() && ("500".equals(divided[0])
+                                       || "400".equals(divided[0]))) {
                                    started.set(true);
                                    rsl.set(true);
                                }
-                               if (started.get() && ("200".equals(divided[0]) || "300".equals(divided[0]))) {
+                               if (started.get() && ("200".equals(divided[0])
+                                       || "300".equals(divided[0]))) {
                                    started.set(false);
                                    rsl.set(true);
                                }
@@ -43,7 +42,7 @@ public class Analizy {
     }
 
     public static void main(String[] args) {
-        Analizy analizy = new Analizy();
+        Analyze analizy = new Analyze();
         analizy.unavailable("source.txt", "target.txt");
     }
 }

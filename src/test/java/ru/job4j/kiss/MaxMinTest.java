@@ -7,7 +7,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-
 public class MaxMinTest {
     @Test
     public void whenIntWithNaturalOrder() {

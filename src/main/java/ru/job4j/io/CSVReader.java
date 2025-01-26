@@ -64,7 +64,8 @@ public class CSVReader {
 
     private static void validate(ArgsName argsName) {
         if (argsName.get("path")  == null || argsName.get("delimiter") == null
-                || argsName.get("out") == null || argsName.get("filter") == null || argsName.size() != 4) {
+                || argsName.get("out") == null
+                || argsName.get("filter") == null || argsName.size() != 4) {
             throw new IllegalArgumentException();
         }
     }

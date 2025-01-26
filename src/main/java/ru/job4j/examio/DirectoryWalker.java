@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 
 public class DirectoryWalker {
 
-
     public static List<Path> searchFiles(String dir, String mode, String name) {
         List<Path> result = new ArrayList<>();
         Predicate<Path> condition = chooseMode(mode, name);

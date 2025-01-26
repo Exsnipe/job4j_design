@@ -14,12 +14,11 @@ import java.util.Formatter;
 import java.util.function.Predicate;
 
 public class ReportForAccDep implements Report {
+    private static final Currency DEFAULT_CURRENCY = Currency.RUB;
 
     private final Store store;
     private final DateTimeParser<Calendar> dateTimeParser;
     private Currency targetCurrency = Currency.RUB;
-
-    private static final Currency DEFAULT_CURRENCY = Currency.RUB;
 
     public ReportForAccDep(Store store, DateTimeParser<Calendar> dateTimeParser) {
         this.store = store;
@@ -42,7 +41,8 @@ public class ReportForAccDep implements Report {
                     .append(dateTimeParser.parse(employee.getFired())).append(" ");
             if (targetCurrency != DEFAULT_CURRENCY) {
                 text.append(
-                        String.format("%.5f", converter.convert(DEFAULT_CURRENCY, employee.getSalary(), targetCurrency)));
+                        String.format("%.5f", converter.convert(DEFAULT_CURRENCY,
+                                employee.getSalary(), targetCurrency)));
             } else {
                 text.append(employee.getSalary());
             }

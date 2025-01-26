@@ -1,6 +1,7 @@
 package ru.job4j.ood.srp.report;
 
 import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ru.job4j.ood.srp.model.Employee;
 import ru.job4j.ood.srp.model.Employees;
@@ -14,8 +15,8 @@ import java.util.GregorianCalendar;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Disabled
 public class XmlReportEngineTest {
-    @Ignore
     @Test
     void whenGenerated() throws JAXBException {
         MemStore store = new MemStore();

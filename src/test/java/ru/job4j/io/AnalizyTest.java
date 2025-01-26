@@ -25,7 +25,7 @@ public class AnalizyTest {
             out.println("500 11:01:02");
             out.println("200 11:02:02");
         }
-        new Analizy().unavailable(source.getAbsolutePath(), target.getAbsolutePath());
+        new Analyze().unavailable(source.getAbsolutePath(), target.getAbsolutePath());
         StringBuilder rsl = new StringBuilder();
         try (BufferedReader in = new BufferedReader(new FileReader(target))) {
             in.lines().forEach(rsl::append);

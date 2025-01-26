@@ -12,6 +12,7 @@ public class Contact implements Serializable {
         this.code = code;
         this.phone = phone;
     }
+
     @Override
     public String toString() {
         return "Contact{"

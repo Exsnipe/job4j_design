@@ -23,7 +23,8 @@ public class DebugDemo {
     public void createTable() {
         try (Statement statement = connection.createStatement()) {
             statement.execute(
-                    "create table if not exists cities(id serial primary key, name text, population int);"
+                    "create table if not exists cities(id serial primary key,"
+                            + "name text, population int);"
             );
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();

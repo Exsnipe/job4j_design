@@ -10,7 +10,8 @@ import java.util.zip.ZipOutputStream;
 
 public class Zip {
     public void packFiles(List<File> sources, File target) {
-        try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
+        try (ZipOutputStream zip = new ZipOutputStream(
+                new BufferedOutputStream(new FileOutputStream(target)))) {
             for (File file : sources) {
                 zip.putNextEntry(new ZipEntry(file.getPath()));
                 try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(file))) {
@@ -23,7 +24,8 @@ public class Zip {
     }
 
     public void packSingleFile(File source, File target) {
-        try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
+        try (ZipOutputStream zip = new ZipOutputStream(
+                new BufferedOutputStream(new FileOutputStream(target)))) {
             zip.putNextEntry(new ZipEntry(source.getPath()));
             try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(source))) {
                 zip.write(out.readAllBytes());
@@ -46,7 +48,8 @@ public class Zip {
         Zip zip = new Zip();
         ArgsName keys = ArgsName.of(args);
         zip.validate(keys);
-        List<Path> list = Search.search(Paths.get(keys.get("d")), path -> !path.toFile().getName().endsWith(keys.get("e")));
+        List<Path> list = Search.search(Paths.get(keys.get("d")), path -> !path.toFile()
+                .getName().endsWith(keys.get("e")));
         List<File> files = new ArrayList<>();
         for (Path path : list) {
             files.add(path.toFile());

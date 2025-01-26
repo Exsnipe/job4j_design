@@ -11,7 +11,7 @@ public class ListUtils {
     }
 
     public static <T> void addAfter(List<T> list, int index, T value) {
-        Objects.checkIndex(index, list.size() - 1);
+        Objects.checkIndex(index, list.size());
         list.add(index + 1, value);
     }
 

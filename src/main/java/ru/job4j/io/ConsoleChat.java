@@ -19,8 +19,6 @@ public class ConsoleChat {
     private String consoleInput;
     private boolean writeLogFlag = true;
 
-
-
     public ConsoleChat(String path, String botAnswers) {
         this.path = path;
         this.botAnswers = botAnswers;

@@ -11,7 +11,6 @@ import java.util.Calendar;
 
 import static org.assertj.core.api.Assertions.*;
 
-
 public class ReportForDevDepTest {
     @Test
     public void whenOneEmployee() {

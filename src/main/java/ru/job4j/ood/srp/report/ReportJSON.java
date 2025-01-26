@@ -22,6 +22,7 @@ public class ReportJSON implements Report {
         gsonBuilder.registerTypeAdapter(GregorianCalendar.class, new CalendarAdapterJson());
         gson = gsonBuilder.create();
     }
+
     @Override
     public String generate(Predicate<Employee> filter) {
         return gson.toJson(store.findBy(filter));

@@ -7,7 +7,8 @@ import java.util.stream.Collectors;
 
 public class Config {
     private final String path;
-    public Map<String, String> value = new HashMap<String, String>();
+
+    private Map<String, String> value = new HashMap<String, String>();
 
     public Config(String path) {
         this.path = path;
@@ -25,7 +26,8 @@ public class Config {
                 .collect(Collectors.toMap(
                         e -> {
                             String[] spl = e.split("=", 2);
-                            if (spl.length < 2 || (spl.length == 2 && "".equals(spl[0]) || "".equals(spl[1]))) {
+                            if (spl.length < 2 || (spl.length == 2
+                                    && "".equals(spl[0]) || "".equals(spl[1]))) {
                                 throw new IllegalArgumentException();
                             }
                             return e.split("=")[0];

@@ -14,16 +14,17 @@ public class SearchFiles implements FileVisitor<Path> {
     final private Predicate<Path> condition;
     private  List<Path> listPath = new ArrayList<>();
 
-    public List<Path> getListPath() {
-        return listPath;
-    }
-
     public SearchFiles(Predicate<Path> condition) {
         this.condition = condition;
     }
 
+    public List<Path> getListPath() {
+        return listPath;
+    }
+
     @Override
-    public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+    public FileVisitResult preVisitDirectory(Path dir,
+                                             BasicFileAttributes attrs) throws IOException {
         return FileVisitResult.CONTINUE;
     }
 
