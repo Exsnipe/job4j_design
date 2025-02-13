@@ -18,4 +18,14 @@ public class CityMallParking implements CarParkingService {
     public void setAmountOfParkingSpaces(int trucks, int passengerCars) {
         this.passengerCarsParkingSpaces = passengerCars;
     }
+
+    @Override
+    public int passengerCarsSpacesRemained() {
+        return 0;
+    }
+
+    @Override
+    public int trucksSpacesRemained() {
+        return 0;
+    }
 }

@@ -8,4 +8,8 @@ public interface CarParkingService {
     public void setAmountOfParkingSpaces(
             int trucks, int passengerCars
     );
+
+    public int passengerCarsSpacesRemained();
+
+    public int trucksSpacesRemained();
 }

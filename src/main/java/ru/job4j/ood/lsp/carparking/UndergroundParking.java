@@ -20,4 +20,14 @@ public class UndergroundParking implements CarParkingService {
         truckParkingSpaces = trucks;
         passengerCarsParkingSpaces = passengerCars;
     }
+
+    @Override
+    public int passengerCarsSpacesRemained() {
+        return 0;
+    }
+
+    @Override
+    public int trucksSpacesRemained() {
+        return 0;
+    }
 }
