@@ -4,4 +4,8 @@ public class Truck extends Car {
     public Truck(int takesParkingSpaces) {
         super(takesParkingSpaces);
     }
+
+    public int getTakesParkingSpaces() {
+        return super.getTakesParkingSpaces();
+    }
 }
