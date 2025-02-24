@@ -43,4 +43,9 @@ public abstract class AbstractStore implements Store {
     public List<Food> getAllFood() {
         return foods;
     }
+
+    @Override
+    public void cleanStore() {
+        foods.clear();
+    }
 }

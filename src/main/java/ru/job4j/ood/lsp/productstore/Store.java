@@ -9,4 +9,6 @@ public interface Store {
     public void setLimitPercent();
 
     public List<Food> getAllFood();
+
+    public void cleanStore();
 }

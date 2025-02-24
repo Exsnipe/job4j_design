@@ -43,4 +43,15 @@ public class ControlQuality {
                 + " the product: " + food.getName());
         return false;
     }
+
+    public void resort() {
+        List<Food> foods = new ArrayList<>();
+        for (Store store : stores) {
+            foods.addAll(store.getAllFood());
+            store.cleanStore();
+        }
+        for (Food food : foods) {
+            sortFood(food);
+        }
+    }
 }
