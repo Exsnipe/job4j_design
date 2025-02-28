@@ -31,7 +31,7 @@ public class LongestUniqueSubstring {
                 maxRange = set.size();
                 indexOfMaxRange = index;
             }
-            result = str.substring(indexOfMaxRange, indexOfMaxRange + maxRange );
+            result = str.substring(indexOfMaxRange, indexOfMaxRange + maxRange);
             if (maxRange > str.length() - index) {
                 break;
             }
