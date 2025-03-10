@@ -20,23 +20,19 @@ public class Merge {
         int rightIndex = 0;
         for (int index = 0; index < result.length; index++) {
             if (leftIndex < left.length && rightIndex < right.length) {
-                result[index] = left[leftIndex] < right[rightIndex] ? left[leftIndex++] : right[rightIndex++];
+                result[index] = left[leftIndex]
+                        < right[rightIndex] ? left[leftIndex++] : right[rightIndex++];
             }
         }
         if (leftIndex < left.length) {
-            System.arraycopy(left, leftIndex, result, result.length - (left.length - leftIndex), left.length - leftIndex);
+            System.arraycopy(left, leftIndex, result,
+                    result.length - (left.length - leftIndex), left.length - leftIndex);
 
         }
         if (rightIndex < right.length) {
-            System.arraycopy(right, rightIndex, result, result.length - (right.length - rightIndex), right.length - rightIndex);
+            System.arraycopy(right, rightIndex, result,
+                    result.length - (right.length - rightIndex), right.length - rightIndex);
         }
         return result;
-    }
-
-    public static void main(String[] args) {
-        int[] left = {2, 5};
-        int[]right = {1, 7, 10};
-        int[] result = merge(left, right);
-        Arrays.stream(result).forEach(System.out::println);
     }
 }

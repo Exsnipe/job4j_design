@@ -6,12 +6,24 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.*;
 
-class MergeTest {
+public class MergeTest {
     @Test
-    void whenSortedThenOk(){
+    public void whenSortedThenOk() {
         int[] array = {10, 4, 6, 4, 8, -13, 2, 3};
         int[] result = Merge.mergesort(array);
-        Arrays.stream(result).forEach(System.out::println);
         assertThat(result).containsExactly(-13, 2, 3, 4, 4, 6, 8, 10);
+    }
+
+    @Test
+    public void whenArrayIsEmpty() {
+        int[] array = {};
+        int[] emptyResult = Merge.mergesort(array);
+        assertThat(emptyResult).isEmpty();
+    }
+
+    @Test
+    public void whenAllElementsAreEqual() {
+        int[] array = {1, 1, 1, 1, 1, 1, 1, 1};
+        assertThat(Merge.mergesort(array)).containsExactly(array);
     }
 }
