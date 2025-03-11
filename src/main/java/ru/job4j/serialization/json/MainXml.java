@@ -8,6 +8,7 @@ import java.io.StringReader;
 
 public class MainXml {
     public static void main(String[] args) throws Exception {
+        System.out.println("hi");
         Person person = new Person(true, 30, new Contact("558-87-345"),
                 new String[] {"Worker", "Married"});
 
