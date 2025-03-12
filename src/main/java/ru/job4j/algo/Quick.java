@@ -17,7 +17,7 @@ public class Quick {
     }
 
     private static int breakPartition(int[] sequence, int start, int end) {
-        int pivot = start;
+        int pivot = sequence[start];
         int left = start + 1;
         int right = end;
         while (true) {
@@ -43,7 +43,7 @@ public class Quick {
     }
 
     public static void main(String[] args) {
-        int[] array = {20, 5, -2, 11, 3, -2};
+        int[] array = {20, 109, -2, 11, 3, -2, -7};
         quickSort(array);
         System.out.println(Arrays.toString(array));
     }
