@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class BracketsTest {
     private final Brackets brackets = new Brackets();
+
     @Test
     void givenValidBracketsWhenIsValidThenTrue() {
         assertThat(brackets.isValid("()")).isTrue();
