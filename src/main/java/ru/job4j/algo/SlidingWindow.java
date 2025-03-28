@@ -23,7 +23,8 @@ public class SlidingWindow {
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int k = 3;
-        System.out.println("Максимальная сумма подмассива длиной " + k + " равна " + findMaxSum(arr, k));
+        System.out.println("Максимальная сумма подмассива длиной "
+                + k + " равна " + findMaxSum(arr, k));
     }
     //Максимальная сумма подмассива длиной 3 равна 24
 }
