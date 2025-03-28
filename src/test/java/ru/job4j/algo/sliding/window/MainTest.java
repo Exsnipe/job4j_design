@@ -15,7 +15,6 @@ public class MainTest {
         intervals.add(new Interval(2, 6));
         intervals.add(new Interval(3, 5));
         intervals.add(new Interval(7, 8));
-
         int[] result = Main.findMaxOverlapInterval(intervals);
         assertThat(result).containsExactly(3, 4);
     }

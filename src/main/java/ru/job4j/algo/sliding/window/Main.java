@@ -7,20 +7,20 @@ public class Main {
         if (intervals.isEmpty()) {
             return new int[] {-1, -1};
         }
-        intervals.sort(Comparator.comparingInt(Interval::start));
+        intervals.sort(Comparator.comparingInt(Interval::getStart));
         int maxStart = -1;
         int maxEnd = -1;
         int macInterval = 0;
-        Queue<Interval> queue = new PriorityQueue<>(Comparator.comparingInt(Interval::end));
+        Queue<Interval> queue = new PriorityQueue<>(Comparator.comparingInt(Interval::getEnd));
         for (Interval interval : intervals) {
-            while (!queue.isEmpty() && queue.peek().end() < interval.start()) {
+            while (!queue.isEmpty() && queue.peek().getEnd() < interval.getStart()) {
                 queue.poll();
             }
             queue.offer(interval);
             if (queue.size() > macInterval) {
                 macInterval = queue.size();
-                maxStart = interval.start();
-                maxEnd = queue.peek().end();
+                maxStart = interval.getStart();
+                maxEnd = queue.peek().getEnd();
             }
         }
         return new int[] {
@@ -29,7 +29,7 @@ public class Main {
     }
 
     private static boolean isIntervalsCrossed(Interval first, Interval second) {
-        return first.end() > second.start() && first.start() < second.end();
+        return first.getEnd() > second.getStart() && first.getStart() < second.getEnd();
     }
 
     public static void main(String[] args) {
@@ -39,11 +39,10 @@ public class Main {
         intervals.add(new Interval(6, 7));
         intervals.add(new Interval(2, 3));
         intervals.add(new Interval(8, 9));
-        Queue<Interval> queue = new PriorityQueue<>(Comparator.comparingInt(el -> el.end()));
+        Queue<Interval> queue = new PriorityQueue<>(Comparator.comparingInt(el -> el.getEnd()));
         queue.addAll(intervals);
         while (!queue.isEmpty()) {
             System.out.println(queue.poll());
         }
-
     }
 }
