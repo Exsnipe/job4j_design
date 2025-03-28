@@ -26,5 +26,4 @@ public class SlidingWindow {
         System.out.println("Максимальная сумма подмассива длиной "
                 + k + " равна " + findMaxSum(arr, k));
     }
-    //Максимальная сумма подмассива длиной 3 равна 24
 }
