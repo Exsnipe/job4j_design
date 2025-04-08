@@ -21,4 +21,8 @@ public class SimpleQueue<T> {
     public void push(T value) {
         in.push(value);
     }
+
+    public boolean isEmpty() {
+        return in.getSize() == 0 && out.getSize() == 0;
+    }
  }
