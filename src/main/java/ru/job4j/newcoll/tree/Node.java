@@ -13,7 +13,7 @@ public class Node<E> {
     }
 
     @SafeVarargs
-    public Node(E value, Node<E>...children) {
+    public Node(E value, Node<E>... children) {
         this.value = value;
         this.children.addAll(Arrays.asList(children));
     }
