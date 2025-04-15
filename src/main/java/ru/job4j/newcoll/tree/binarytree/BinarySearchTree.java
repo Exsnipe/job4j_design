@@ -48,11 +48,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
             return node;
         }
         if (key.compareTo(node.key) > 0) {
-            find(node.right, key);
+            return find(node.right, key);
         } else {
-            find(node.left, key);
+            return find(node.left, key);
         }
-        return null;
     }
 
     public boolean remove(T key) {
@@ -76,23 +75,33 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     public List<T> inPreOrder() {
-        //TODO реализуйте метод
-        return null;
+        List<T> list = new ArrayList<>();
+        Node node = root;
+        return inPreOrder(root, list);
     }
 
     private List<T> inPreOrder(Node localRoot, List<T> list) {
-        //TODO реализуйте метод
-        return null;
+        if (localRoot != null) {
+            list.add(localRoot.key);
+            inPreOrder(localRoot.left, list);
+            inPreOrder(localRoot.right, list);
+        }
+        return list;
     }
 
     public List<T> inPostOrder() {
-        //TODO реализуйте метод
-        return null;
+        List<T> list = new ArrayList<>();
+        Node node = root;
+        return inPostOrder(node, list);
     }
 
     private List<T> inPostOrder(Node localRoot, List<T> list) {
-        //TODO реализуйте метод
-        return null;
+        if (localRoot != null) {
+            inPostOrder(localRoot.left, list);
+            inPostOrder(localRoot.right, list);
+            list.add(localRoot.key);
+        }
+        return list;
     }
 
     public T minimum() {
@@ -100,8 +109,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     private Node minimum(Node node) {
-        //TODO реализуйте метод
-        return null;
+        if (node.left == null) {
+            return node;
+        }
+        return minimum(node.left);
     }
 
     public T maximum() {
@@ -109,8 +120,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     private Node maximum(Node node) {
-        //TODO реализуйте метод
-        return null;
+        if (node.right == null) {
+            return node;
+        }
+        return maximum(node.right);
     }
 
     @Override
@@ -141,15 +154,5 @@ public class BinarySearchTree<T extends Comparable<T>> {
         public String getText() {
             return key.toString();
         }
-    }
-
-    public static void main(String[] args) {
-        BinarySearchTree<String> tree = new BinarySearchTree<>();
-        tree.put("first");
-        tree.put("second");
-        tree.put("third");
-        System.out.println(tree);
-        System.out.println(tree.find(tree.root, "second").key);
-        System.out.println(tree.contains("third"));
     }
 }
