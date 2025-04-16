@@ -98,4 +98,15 @@ public class BinarySearchTreeTest {
                 .containsExactly(1, 3, 2, 5, 7, 6, 4);
     }
 
+    @Test
+    void whenRemoveNode() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        for (int element : new int[] {2, 1, 10, 6, 14, 4, 8, 12,
+                16, 11, 9, 13, 15, 17, 3, 5, 7}) {
+            tree.put(element);
+        }
+        assertThat(tree.remove(10)).isTrue();
+        assertThat(tree.inSymmetricalOrder()).containsExactly(1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12,
+                13, 14, 15, 16, 17);
+    }
 }
