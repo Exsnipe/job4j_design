@@ -117,6 +117,6 @@ public class BinarySearchTreeTest {
             tree.put(element);
         }
         tree.clear();
-        assertThat(tree.inSymmetricalOrder().size()).isEqualTo(1);
+        assertThat(tree.inSymmetricalOrder().size()).isEqualTo(0);
     }
 }
