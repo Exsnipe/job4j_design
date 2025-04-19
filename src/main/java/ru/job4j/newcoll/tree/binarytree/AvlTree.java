@@ -124,13 +124,21 @@ public class AvlTree<T extends Comparable<T>> {
     }
 
     private Node leftRotation(Node node) {
-        //TODO реализуйте метод
-        return null;
+        Node newParent = node.right;
+        node.right = newParent.left;
+        newParent.left = node;
+        updateHeight(newParent);
+        updateHeight(node);
+        return newParent;
     }
 
     private Node rightRotation(Node node) {
-        //TODO реализуйте метод
-        return null;
+        Node newParent = node.left;
+        node.left = newParent.right;
+        newParent.right = node;
+        updateHeight(newParent);
+        updateHeight(node);
+        return newParent;
     }
 
     public T minimum() {
