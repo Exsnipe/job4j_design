@@ -21,7 +21,7 @@ public class TreeAVLMap <T extends Comparable<T>, V> {
             root = insert(root, key, value);
             result = true;
         }
-        return false;
+        return result;
     }
 
 
@@ -104,21 +104,30 @@ public class TreeAVLMap <T extends Comparable<T>, V> {
     }
 
     public Set<T> keySet() {
-        return inSymmetricalOrder(root, new HashSet<>());
+        return keysInSymmetricalOrder(root, new HashSet<>());
     }
 
-    private Set<T> inSymmetricalOrder(Node node, Set<T> result) {
+    private Set<T> keysInSymmetricalOrder(Node node, Set<T> result) {
         if (Objects.nonNull(node)) {
-            result = inSymmetricalOrder(node.left, result);
+            result = keysInSymmetricalOrder(node.left, result);
             result.add(node.key);
-            result = inSymmetricalOrder(node.right, result);
+            result = keysInSymmetricalOrder(node.right, result);
         }
         return result;
     }
 
     public Collection<V> values() {
-        // TODO реализуйте метод
-        return null;
+        Collection<V> result = new ArrayList<>();
+        return valuesInSymmetricalOrder(root, result);
+    }
+
+    private Collection<V> valuesInSymmetricalOrder(Node node, Collection<V> result) {
+        if (Objects.nonNull(node)) {
+            result = valuesInSymmetricalOrder(node.left, result);
+            result.add(node.value);
+            result = valuesInSymmetricalOrder(node.right, result);
+        }
+        return result;
     }
 
     private class Node {
