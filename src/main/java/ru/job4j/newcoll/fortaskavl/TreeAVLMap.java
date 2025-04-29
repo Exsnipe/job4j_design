@@ -1,10 +1,12 @@
 package ru.job4j.newcoll.fortaskavl;
 
 import ru.job4j.newcoll.tree.binarytree.AvlTree;
+import ru.job4j.newcoll.tree.binarytree.PrintTree;
+import ru.job4j.newcoll.tree.binarytree.VisualNode;
 
 import java.util.*;
 
-public class TreeAVLMap <T extends Comparable<T>, V> {
+public class TreeAVLMap<T extends Comparable<T>, V> {
     private Node root;
 
     public boolean contains(T key) {
@@ -17,25 +19,28 @@ public class TreeAVLMap <T extends Comparable<T>, V> {
 
     public boolean insert(T key, V value) {
         boolean result = false;
-        if (Objects.nonNull(key) && Objects.nonNull(value) && !contains(key)) {
+        if (Objects.nonNull(key) && Objects.nonNull(value)) {
             root = insert(root, key, value);
             result = true;
         }
         return result;
     }
 
-
     private Node insert(Node node, T key, V value) {
         Node result = new Node(key, value);
         if (Objects.nonNull(node)) {
             int compareResult = key.compareTo(node.key);
-            if (compareResult > 0) {
+            if (compareResult == 0) {
+                node.value = value;
+                return node;
+            }
+            if (compareResult < 0) {
                 node.left = insert(node.left, key, value);
             } else {
                 node.right = insert(node.right, key, value);
             }
             updateHeight(node);
-            node = balance(node);
+            result = balance(node);
         }
         return result;
     }
@@ -94,17 +99,82 @@ public class TreeAVLMap <T extends Comparable<T>, V> {
     }
 
     public boolean remove(T key) {
-        // TODO реализуйте метод
-        return false;
+        boolean result = false;
+        if (Objects.nonNull(key) && Objects.nonNull(root) && contains(key)) {
+            root = remove(root, key);
+            result = true;
+        }
+        return result;
+    }
+
+    private Node remove(Node node, T key) {
+        if (node == null) {
+            return null;
+        }
+        int comparisonResult = key.compareTo(node.key);
+        if (comparisonResult < 0) {
+            node.left = remove(node.left, key);
+        } else if (comparisonResult > 0) {
+            node.right = remove(node.right, key);
+        } else {
+            if (node.left == null) {
+                return node.right;
+            } else if (node.right == null) {
+                return node.left;
+            } else {
+                if (node.left.height > node.right.height) {
+                    T heir = maximum(node.left).key;
+                    node.key = heir;
+                    node.left = remove(node.left, heir);
+                } else {
+                    T heir = minimum(node.right).key;
+                    node.key = heir;
+                    node.right = remove(node.right, heir);
+                }
+            }
+        }
+        updateHeight(node);
+        return balance(node);
+    }
+
+    private Node maximum(Node node) {
+        if (node.right == null) {
+            return node;
+        }
+        return maximum(node.right);
+    }
+
+    private Node minimum(Node node) {
+        if (node.left == null) {
+            return node;
+        }
+        return minimum(node.left);
     }
 
     public V get(T key) {
-        // TODO реализуйте метод
-        return null;
+        if (root == null || key == null || !contains(key)) {
+            return null;
+        }
+        return get(root, key);
+    }
+
+    private V get(Node node, T key) {
+        V result = null;
+        int compareKey = key.compareTo(node.key);
+        if (compareKey == 0) {
+            return node.value;
+        }
+        if (compareKey > 0) {
+            result = get(node.right, key);
+        } else {
+            result = get(node.left, key);
+        }
+        return result;
     }
 
     public Set<T> keySet() {
-        return keysInSymmetricalOrder(root, new HashSet<>());
+        Set<T> result = new HashSet<>();
+        return keysInSymmetricalOrder(root, result);
     }
 
     private Set<T> keysInSymmetricalOrder(Node node, Set<T> result) {
@@ -130,7 +200,12 @@ public class TreeAVLMap <T extends Comparable<T>, V> {
         return result;
     }
 
-    private class Node {
+    @Override
+    public String toString() {
+        return PrintTree.getTreeDisplay(root);
+    }
+
+    private class Node implements VisualNode {
         private int balanceFactor;
         private T key;
         private V value;
@@ -141,6 +216,21 @@ public class TreeAVLMap <T extends Comparable<T>, V> {
         Node(T key, V value) {
             this.key = key;
             this.value = value;
+        }
+
+        @Override
+        public VisualNode getLeft() {
+            return left;
+        }
+
+        @Override
+        public VisualNode getRight() {
+            return right;
+        }
+
+        @Override
+        public String getText() {
+            return String.valueOf(key);
         }
     }
 }

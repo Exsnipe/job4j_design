@@ -32,11 +32,10 @@ class TreeAVLMapTest {
         assertThat(tree.put(5, "55")).isTrue();
         assertThat(tree.put(6, "66")).isTrue();
         assertThat(tree.put(7, "77")).isTrue();
-        System.out.println(tree.contains(7));
-        //assertThat(tree.values()).hasSize(7);
-                /*.containsExactly("11", "22", "33", "44", "55", "66", "77");
+        assertThat(tree.values()).hasSize(7)
+                .containsExactly("11", "22", "33", "44", "55", "66", "77");
         assertThat(tree.keySet()).hasSize(7)
-                .containsExactly(1, 2, 3, 4, 5, 6, 7);*/
+                .containsExactly(1, 2, 3, 4, 5, 6, 7);
     }
 
     @Test
